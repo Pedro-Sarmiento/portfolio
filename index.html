@@ -583,7 +583,7 @@
                 <span class="i18n active" data-lang="es">Ver proyectos</span>
                 <span class="i18n" data-lang="en">View projects</span>
             </a>
-            <a href="#" class="btn btn-outline cv-download">
+            <a href="cv_es.pdf" class="btn btn-outline cv-download" download>
                 <span class="i18n active" data-lang="es">↓ Descargar CV</span>
                 <span class="i18n" data-lang="en">↓ Download CV</span>
             </a>
@@ -833,6 +833,11 @@
             if (el.closest('.lang-toggle')) return;
             el.classList.toggle('active', el.dataset.lang === currentLang);
         });
+
+        // Update CV download link
+        document.querySelectorAll('.cv-download').forEach(btn => {
+            btn.href = cvFiles[currentLang];
+        });
     });
 
     // === SCROLL ANIMATIONS ===
@@ -845,10 +850,9 @@
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // === CV DOWNLOAD ===
+    const cvFiles = { es: 'cv_es.pdf', en: 'cv_en.pdf' };
     document.querySelectorAll('.cv-download').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-        });
+        btn.href = cvFiles[currentLang];
     });
 </script>
 
